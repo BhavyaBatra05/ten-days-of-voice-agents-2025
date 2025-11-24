@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-11-23 01:28:31",
+    "mood": "mid",
+    "energy": "seven",
+    "stress": "Lot of assignments to submit today",
+    "objectives": [
+      "completing assignments",
+      "doing DSAs",
+      "listening to music"
+    ],
+    "summary": "User's mood is mid, energy level is seven, and they are stressed about assignments due today. Objectives for today include completing assignments, doing TSAs, and listening to music."
+  },
+  {
+    "date": "2025-11-22 01:15:45",
+    "mood": "low",
+    "energy": "five",
+    "stress": "Feeling overwhelmed with work and personal commitments",
+    "objectives": [
+      "managing workload",
+      "finding time for self-care",
+      "staying organized"
+    ],
+    "summary": "User's mood is low, energy level is five, and they are feeling overwhelmed with work and personal commitments. Objectives for today include managing workload, finding time for self-care, and staying organized."
+  },
+  {
+    "date": "2025-11-24 03:16:09",
+    "mood": "mid",
+    "energy": "eight",
+    "stress": "no",
+    "objectives": [
+      "complete an assignment",
+      "do an ML project",
+      "go for cycling in the evening"
+    ],
+    "summary": "User reported a mid mood and eight energy level, with no current stressors. Objectives for the day include completing an assignment, doing an ML project, and going for cycling in the evening."
+  }
+]

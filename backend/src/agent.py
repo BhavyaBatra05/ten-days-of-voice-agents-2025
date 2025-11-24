@@ -1,4 +1,7 @@
 import logging
+import json
+from pathlib import Path
+from datetime import datetime
 
 from dotenv import load_dotenv
 from livekit.agents import (
@@ -12,8 +15,8 @@ from livekit.agents import (
     cli,
     metrics,
     tokenize,
-    # function_tool,
-    # RunContext
+    function_tool,
+    RunContext
 )
 from livekit.plugins import murf, silero, google, deepgram, noise_cancellation
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
@@ -22,32 +25,175 @@ logger = logging.getLogger("agent")
 
 load_dotenv(".env.local")
 
+# Global wellness session state
+current_session = {
+    "date": None,
+    "mood": None,
+    "energy": None,
+    "stress": None,
+    "objectives": [],
+    "summary": None
+}
+
 
 class Assistant(Agent):
     def __init__(self) -> None:
+        # Load previous check-ins to provide context
+        self.previous_context = self._load_previous_sessions()
+        
         super().__init__(
-            instructions="""You are a helpful voice AI assistant. The user is interacting with you via voice, even if you perceive the conversation as text.
-            You eagerly assist users with their questions by providing information from your extensive knowledge.
-            Your responses are concise, to the point, and without any complex formatting or punctuation including emojis, asterisks, or other symbols.
-            You are curious, friendly, and have a sense of humor.""",
-        )
+            instructions=f"""You are a supportive Health and Wellness Voice Companion. You conduct daily check-ins with users to help them reflect on their wellbeing and set intentions.
 
-    # To add tools, use the @function_tool decorator.
-    # Here's an example that adds a simple weather tool.
-    # You also have to add `from livekit.agents import function_tool, RunContext` to the top of this file
-    # @function_tool
-    # async def lookup_weather(self, context: RunContext, location: str):
-    #     """Use this tool to look up current weather information in the given location.
-    #
-    #     If the location is not supported by the weather service, the tool will indicate this. You must tell the user the location's weather is unavailable.
-    #
-    #     Args:
-    #         location: The location to look up weather information for (e.g. city name)
-    #     """
-    #
-    #     logger.info(f"Looking up weather for {location}")
-    #
-    #     return "sunny with a temperature of 70 degrees."
+            Your role is to:
+            - Be warm, empathetic, and non-judgmental
+            - Ask about mood, energy levels, and stress
+            - Help users identify 1-3 daily objectives or intentions
+            - Offer simple, practical, grounded advice (no medical diagnosis)
+            - Keep responses conversational and natural
+            
+            IMPORTANT: You are NOT a medical professional. Avoid diagnosis or medical claims. Focus on supportive conversation and practical suggestions.
+            
+            Check-in Flow:
+            1. Start by introducing yourself: "Hi! I'm your Health and Wellness Companion from Cult.fit." Then warmly ask about their mood and energy today
+            2. Ask about any stress or concerns
+            3. Help them identify 1-3 objectives or intentions for today
+            4. Offer a small piece of practical advice or reflection
+            5. Recap the key points and confirm with them
+            6. MUST call save_wellness_session tool with a brief summary to save the check-in. Do not end the conversation without calling this tool.
+            
+            Previous Context:
+            {self.previous_context}
+            
+            Use the previous context to make connections: "Last time we talked, you mentioned... How does today compare?"
+            
+            Keep responses short and conversational, as if you're a supportive friend checking in.""",
+        )
+    
+    def _load_previous_sessions(self) -> str:
+        """Load the last 3 check-ins to provide context"""
+        wellness_file = Path("wellness_log.json")
+        
+        if not wellness_file.exists():
+            return "This is our first conversation together."
+        
+        try:
+            with open(wellness_file, "r") as f:
+                sessions = json.load(f)
+            
+            if not sessions:
+                return "This is our first conversation together."
+            
+            # Get last 3 sessions
+            recent = sessions[-3:]
+            context_parts = []
+            
+            for session in recent:
+                date = session.get("date", "Unknown date")
+                mood = session.get("mood", "not specified")
+                energy = session.get("energy", "not specified")
+                objectives = session.get("objectives", [])
+                
+                context_parts.append(
+                    f"On {date}: Mood was {mood}, energy was {energy}. "
+                    f"Objectives: {', '.join(objectives) if objectives else 'none set'}"
+                )
+            
+            return "\n".join(context_parts)
+        except Exception as e:
+            logger.error(f"Error loading previous sessions: {e}")
+            return "This is our first conversation together."
+
+    @function_tool
+    async def update_wellness_session(
+        self,
+        context: RunContext,
+        mood: str | None = None,
+        energy: str | None = None,
+        stress: str | None = None,
+        objectives: list[str] | None = None
+    ):
+        """Update the current wellness check-in session with user information.
+        
+        Args:
+            mood: How the user is feeling (e.g., happy, tired, anxious, good, etc.)
+            energy: User's energy level (e.g., high, low, medium, drained, energized)
+            stress: Any stressors or concerns (text description)
+            objectives: List of 1-3 things the user wants to accomplish today
+        """
+        global current_session
+        
+        if mood:
+            current_session["mood"] = mood
+        if energy:
+            current_session["energy"] = energy
+        if stress:
+            current_session["stress"] = stress
+        if objectives:
+            current_session["objectives"] = objectives
+        
+        current_session["date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        logger.info(f"Session updated: {current_session}")
+        
+        # Check what's still needed
+        missing = []
+        if not current_session["mood"]:
+            missing.append("mood")
+        if not current_session["energy"]:
+            missing.append("energy level")
+        if not current_session["objectives"] or len(current_session["objectives"]) == 0:
+            missing.append("objectives for today")
+        
+        if missing:
+            return f"Got it. Still need to know about: {', '.join(missing)}"
+        else:
+            return "Perfect! I have a good understanding of how you're doing today and what you want to accomplish."
+
+    @function_tool
+    async def save_wellness_session(self, context: RunContext, summary: str):
+        """Save the completed wellness check-in to the log file. Call this after recapping with the user.
+        
+        Args:
+            summary: A brief summary sentence about this check-in. ALWAYS use present tense. Format: "User is feeling [mood], energy is [level], and [stress situation]. Objectives are [list objectives]."
+        """
+        global current_session
+        
+        # Verify session is complete
+        if not all([
+            current_session["mood"],
+            current_session["energy"],
+            current_session["objectives"]
+        ]):
+            return "Cannot save session - missing required information (mood, energy, or objectives)"
+        
+        current_session["summary"] = summary
+        
+        # Load existing log
+        wellness_file = Path("wellness_log.json")
+        
+        if wellness_file.exists():
+            with open(wellness_file, "r") as f:
+                sessions = json.load(f)
+        else:
+            sessions = []
+        
+        # Add current session
+        sessions.append(current_session.copy())
+        
+        # Save back to file
+        with open(wellness_file, "w") as f:
+            json.dump(sessions, f, indent=2)
+        
+        logger.info(f"Wellness session saved: {current_session}")
+        
+        # Reset for next session
+        for key in current_session:
+            if key == "objectives":
+                current_session[key] = []
+            else:
+                current_session[key] = None
+        
+        return "Check-in saved successfully! Looking forward to our next conversation. Take care!"
 
 
 def prewarm(proc: JobProcess):
