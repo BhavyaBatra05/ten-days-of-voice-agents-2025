@@ -1,0 +1,170 @@
+{
+  "company_info": {
+    "name": "Cashfree Payments",
+    "tagline": "India's Leading Payment Solutions Provider",
+    "description": "Cashfree Payments is a payments and API banking company that enables businesses to collect payments, make payouts, and manage their finances. We power payments for over 500,000 businesses across India with our simple, secure, and reliable payment solutions.",
+    "founded": "2015",
+    "headquarters": "Bangalore, India",
+    "target_customers": "E-commerce businesses, Online marketplaces, SaaS companies, Educational platforms, Gaming companies, Fintech startups, SMEs, Large enterprises"
+  },
+  "products": [
+    {
+      "name": "Payment Gateway",
+      "description": "Accept payments online through 100+ payment modes including UPI, cards, netbanking, and wallets. Single integration with instant checkout and auto-retry for failed payments.",
+      "use_cases": ["E-commerce checkout", "Subscription billing", "Marketplace payments", "Course fees collection"]
+    },
+    {
+      "name": "Payment Links",
+      "description": "Create and share payment links instantly via SMS, email, or WhatsApp. No website or technical integration needed. Perfect for quick invoicing and remote collections.",
+      "use_cases": ["Quick invoicing", "Social media sales", "Freelancer payments", "Service billing"]
+    },
+    {
+      "name": "Payouts",
+      "description": "Automate bulk transfers to bank accounts, UPI IDs, and wallets. Schedule payouts, manage beneficiaries, and track all transactions in real-time.",
+      "use_cases": ["Vendor payments", "Refunds", "Commission payouts", "Salary disbursement"]
+    },
+    {
+      "name": "Auto Collect",
+      "description": "Get virtual bank accounts (Virtual Accounts) to automatically reconcile incoming payments. Each customer gets a unique account number for seamless tracking.",
+      "use_cases": ["Subscription tracking", "Rental payments", "Fee collections", "Wallet top-ups"]
+    },
+    {
+      "name": "Instant Settlements",
+      "description": "Get your payment settlements instantly to your bank account 24x7, including weekends and holidays. No waiting for T+2 or T+3 cycles.",
+      "use_cases": ["Cash flow management", "Working capital needs", "Emergency liquidity", "Fast-growing businesses"]
+    },
+    {
+      "name": "Vendor Payments",
+      "description": "Pay your vendors and suppliers directly through our platform with smart approval workflows, payment scheduling, and automated reconciliation.",
+      "use_cases": ["Supplier payments", "Contractor payments", "Bulk transfers", "Accounts payable automation"]
+    }
+  ],
+  "pricing": {
+    "payment_gateway": {
+      "domestic_cards": "2% per transaction",
+      "international_cards": "3% per transaction",
+      "upi": "0.3% to 0.5% per transaction",
+      "netbanking": "₹2 to ₹5 per transaction",
+      "wallets": "2% per transaction",
+      "no_setup_fee": true,
+      "no_annual_fee": true,
+      "instant_activation": true
+    },
+    "payment_links": {
+      "pricing": "Same as payment gateway pricing",
+      "free_to_create": true,
+      "unlimited_links": true
+    },
+    "payouts": {
+      "bank_transfer": "₹3 per payout",
+      "upi_transfer": "₹2 per payout",
+      "imps": "₹3 per payout",
+      "bulk_discounts": "Available for high volume"
+    },
+    "auto_collect": {
+      "virtual_accounts": "₹2 per virtual account per month",
+      "transaction_fee": "Same as payment gateway"
+    },
+    "instant_settlements": {
+      "fee": "1% of settlement amount (min ₹10)",
+      "availability": "24x7 including holidays"
+    },
+    "notes": {
+      "no_hidden_charges": true,
+      "transparent_pricing": "All fees disclosed upfront",
+      "volume_discounts": "Custom pricing for enterprises"
+    }
+  },
+  "faqs": [
+    {
+      "question": "What does Cashfree Payments do?",
+      "answer": "Cashfree Payments is a payment gateway and API banking company that helps businesses collect payments online and make payouts. We offer payment gateway for accepting payments via UPI, cards, netbanking and wallets, payment links for no-code collections, payouts for bulk transfers, and instant settlements for faster cash flow.",
+      "category": "general"
+    },
+    {
+      "question": "Who is Cashfree for?",
+      "answer": "Cashfree is perfect for e-commerce businesses, online marketplaces, SaaS companies, educational platforms, gaming companies, fintech startups, and any business that needs to accept online payments or make payouts in India. We serve over 500,000 businesses from small startups to large enterprises.",
+      "category": "general"
+    },
+    {
+      "question": "Do you have a free tier or trial?",
+      "answer": "Yes! There's no setup fee, no annual maintenance fee, and no minimum transaction volume. You only pay per successful transaction. You can sign up for free, test in sandbox mode, and start accepting real payments immediately after verification. Pay only when you earn.",
+      "category": "pricing"
+    },
+    {
+      "question": "What are your transaction charges?",
+      "answer": "Our pricing is transparent and competitive. Domestic cards cost 2%, international cards 3%, UPI is 0.3% to 0.5%, netbanking is ₹2 to ₹5 per transaction, and wallets are 2%. For payouts, bank transfers cost ₹3 and UPI transfers cost ₹2. No setup or annual fees.",
+      "category": "pricing"
+    },
+    {
+      "question": "How fast can I integrate?",
+      "answer": "Integration is super quick! Most developers complete payment gateway integration in 2-4 hours with our REST APIs and SDKs. For no-code solutions like Payment Links, you can start accepting payments in under 5 minutes. We support Node.js, PHP, Python, Java, .NET, and more.",
+      "category": "technical"
+    },
+    {
+      "question": "What payment methods do you support?",
+      "answer": "We support 100+ payment modes including all major UPI apps like Google Pay, PhonePe, Paytm, all credit and debit cards (Visa, Mastercard, RuPay, Amex), 50+ netbanking options, popular wallets like Paytm and PhonePe, and even cardless EMI and buy now pay later options.",
+      "category": "features"
+    },
+    {
+      "question": "When do I get my money?",
+      "answer": "Standard settlements happen in T+1 to T+2 days automatically to your bank account. But with our Instant Settlements feature, you can withdraw your money anytime 24x7 including weekends and holidays. Funds reach your account within minutes. Perfect for managing cash flow.",
+      "category": "settlements"
+    },
+    {
+      "question": "Is Cashfree secure and compliant?",
+      "answer": "Absolutely! We are PCI-DSS Level 1 certified, the highest security standard in payments. All transactions are encrypted with 256-bit SSL, we use 3D Secure authentication, and have advanced fraud detection. We never store sensitive card data. We're also audited regularly for compliance.",
+      "category": "security"
+    },
+    {
+      "question": "Can I use Cashfree without a website?",
+      "answer": "Yes! Our Payment Links feature lets you accept payments without any website or app. Just create a payment link from your dashboard and share it via SMS, email, WhatsApp, or social media. Your customers can pay instantly using any payment method. Perfect for freelancers and small businesses.",
+      "category": "features"
+    },
+    {
+      "question": "Do you support recurring payments?",
+      "answer": "Yes, we fully support recurring payments and subscription billing through our payment gateway. You can set up automatic charges for daily, weekly, monthly, or custom intervals. We handle auto-retry for failed payments and send payment reminders. Perfect for SaaS and subscription businesses.",
+      "category": "features"
+    },
+    {
+      "question": "What are Payouts and how do they work?",
+      "answer": "Payouts let you transfer money to anyone's bank account, UPI ID, or wallet instantly. You can make single transfers or bulk payouts to thousands of beneficiaries at once. Perfect for paying vendors, refunds, commissions, or salaries. Bank transfers cost just ₹3 and UPI transfers cost ₹2.",
+      "category": "products"
+    },
+    {
+      "question": "What is Auto Collect?",
+      "answer": "Auto Collect gives you virtual bank accounts (VAs) for tracking incoming payments automatically. Each customer gets a unique account number, so when they transfer money, it's automatically credited and reconciled in real-time. Perfect for subscription businesses, rent collection, and wallet top-ups. Costs just ₹2 per VA per month.",
+      "category": "products"
+    },
+    {
+      "question": "Do you provide technical support?",
+      "answer": "Yes! We have 24x7 technical support via email, phone, and chat. We also provide comprehensive documentation, code samples, Postman collections, SDKs in multiple languages, and a dedicated developer community. Our integration team can help with custom requirements.",
+      "category": "support"
+    },
+    {
+      "question": "What's the minimum business size to use Cashfree?",
+      "answer": "There's no minimum! We work with everyone from solo freelancers and individual sellers to large enterprises processing crores daily. Our solutions scale automatically with your business. Start small and grow - our pricing stays transparent at every stage.",
+      "category": "general"
+    },
+    {
+      "question": "Can I get a demo or speak to sales?",
+      "answer": "Absolutely! We'd love to show you how Cashfree can work for your specific business. Our team can walk you through the dashboard, discuss your use case, show integration options, and provide custom pricing if needed. Book a demo anytime!",
+      "category": "sales"
+    },
+    {
+      "question": "Do you support international payments?",
+      "answer": "Yes, we support international card payments from customers in 100+ countries. International transactions are charged at 3% per transaction. We handle multi-currency conversion and settlement in INR. Great for businesses selling to global customers.",
+      "category": "features"
+    },
+    {
+      "question": "What makes Cashfree different from competitors?",
+      "answer": "We offer instant settlements 24x7, the fastest integration with 2-hour setup time, transparent pricing with no hidden fees, highest success rates in the industry with smart routing, and comprehensive solutions beyond just payments - including payouts, virtual accounts, and vendor payments. Plus, we're known for best-in-class support.",
+      "category": "general"
+    },
+    {
+      "question": "Can I customize the payment page?",
+      "answer": "Yes! Our checkout page is fully customizable with your brand logo, colors, and theme. You can also use our APIs to build a completely custom payment experience. We support custom domain, custom fields, and multiple languages for localization.",
+      "category": "features"
+    }
+  ]
+}
