@@ -1,0 +1,181 @@
+{
+  "store_name": "FreshMart Express",
+  "categories": {
+    "groceries": [
+      {
+        "id": "G001",
+        "name": "Whole Wheat Bread",
+        "category": "groceries",
+        "price": 45,
+        "brand": "Harvest Gold",
+        "size": "400g",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "G002",
+        "name": "Fresh Milk",
+        "category": "groceries",
+        "price": 60,
+        "brand": "Amul",
+        "size": "1L",
+        "tags": ["dairy", "vegetarian"]
+      },
+      {
+        "id": "G003",
+        "name": "Brown Eggs",
+        "category": "groceries",
+        "price": 90,
+        "brand": "Country Eggs",
+        "size": "6 pieces",
+        "tags": ["protein"]
+      },
+      {
+        "id": "G004",
+        "name": "Peanut Butter",
+        "category": "groceries",
+        "price": 180,
+        "brand": "MyFitness",
+        "size": "500g",
+        "tags": ["protein", "vegan"]
+      },
+      {
+        "id": "G005",
+        "name": "Basmati Rice",
+        "category": "groceries",
+        "price": 150,
+        "brand": "India Gate",
+        "size": "1kg",
+        "tags": ["vegan", "gluten-free"]
+      },
+      {
+        "id": "G006",
+        "name": "Pasta",
+        "category": "groceries",
+        "price": 75,
+        "brand": "Maggi",
+        "size": "400g",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "G007",
+        "name": "Tomato Sauce",
+        "category": "groceries",
+        "price": 120,
+        "brand": "Kissan",
+        "size": "500g",
+        "tags": ["vegan"]
+      },
+      {
+        "id": "G008",
+        "name": "Olive Oil",
+        "category": "groceries",
+        "price": 350,
+        "brand": "Figaro",
+        "size": "500ml",
+        "tags": ["vegan", "healthy"]
+      }
+    ],
+    "snacks": [
+      {
+        "id": "S001",
+        "name": "Potato Chips",
+        "category": "snacks",
+        "price": 20,
+        "brand": "Lays",
+        "size": "50g",
+        "tags": ["vegan"]
+      },
+      {
+        "id": "S002",
+        "name": "Chocolate Bar",
+        "category": "snacks",
+        "price": 50,
+        "brand": "Dairy Milk",
+        "size": "50g",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "S003",
+        "name": "Cookies",
+        "category": "snacks",
+        "price": 40,
+        "brand": "Parle-G",
+        "size": "200g",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "S004",
+        "name": "Namkeen Mix",
+        "category": "snacks",
+        "price": 60,
+        "brand": "Haldiram's",
+        "size": "150g",
+        "tags": ["vegan"]
+      }
+    ],
+    "prepared_food": [
+      {
+        "id": "P001",
+        "name": "Margherita Pizza",
+        "category": "prepared_food",
+        "price": 250,
+        "brand": "Domino's",
+        "size": "Medium",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "P002",
+        "name": "Veg Sandwich",
+        "category": "prepared_food",
+        "price": 80,
+        "brand": "FreshMart Kitchen",
+        "size": "Regular",
+        "tags": ["vegetarian"]
+      },
+      {
+        "id": "P003",
+        "name": "Chicken Biryani",
+        "category": "prepared_food",
+        "price": 200,
+        "brand": "FreshMart Kitchen",
+        "size": "Single Serve",
+        "tags": ["non-veg"]
+      },
+      {
+        "id": "P004",
+        "name": "Paneer Burger",
+        "category": "prepared_food",
+        "price": 120,
+        "brand": "FreshMart Kitchen",
+        "size": "Regular",
+        "tags": ["vegetarian"]
+      }
+    ],
+    "beverages": [
+      {
+        "id": "B001",
+        "name": "Orange Juice",
+        "category": "beverages",
+        "price": 80,
+        "brand": "Tropicana",
+        "size": "1L",
+        "tags": ["vegan"]
+      },
+      {
+        "id": "B002",
+        "name": "Cola",
+        "category": "beverages",
+        "price": 40,
+        "brand": "Coca-Cola",
+        "size": "500ml",
+        "tags": ["vegan"]
+      }
+    ]
+  },
+  "recipes": {
+    "peanut butter sandwich": ["G001", "G004"],
+    "pasta": ["G006", "G007", "G008"],
+    "breakfast": ["G001", "G002", "G003"],
+    "sandwich": ["G001", "G003"]
+  }
+}
