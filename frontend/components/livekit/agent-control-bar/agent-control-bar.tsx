@@ -2,7 +2,7 @@
 
 import { type HTMLAttributes, useCallback, useState } from 'react';
 import { Track } from 'livekit-client';
-import { useChat, useRemoteParticipants } from '@livekit/components-react';
+import { useChat, useRemoteParticipants, useRoomContext } from '@livekit/components-react';
 import { ChatTextIcon, PhoneDisconnectIcon } from '@phosphor-icons/react/dist/ssr';
 import { useSession } from '@/components/app/session-provider';
 import { TrackToggle } from '@/components/livekit/agent-control-bar/track-toggle';
@@ -24,6 +24,7 @@ export interface ControlBarControls {
 
 export interface AgentControlBarProps extends UseInputControlsProps {
   controls?: ControlBarControls;
+  chatOpen?: boolean;
   onDisconnect?: () => void;
   onChatOpenChange?: (open: boolean) => void;
   onDeviceError?: (error: { source: Track.Source; error: Error }) => void;
@@ -34,6 +35,7 @@ export interface AgentControlBarProps extends UseInputControlsProps {
  */
 export function AgentControlBar({
   controls,
+  chatOpen = false,
   saveUserChoices = true,
   className,
   onDisconnect,
@@ -41,9 +43,9 @@ export function AgentControlBar({
   onChatOpenChange,
   ...props
 }: AgentControlBarProps & HTMLAttributes<HTMLDivElement>) {
+  const room = useRoomContext();
   const { send } = useChat();
   const participants = useRemoteParticipants();
-  const [chatOpen, setChatOpen] = useState(false);
   const publishPermissions = usePublishPermissions();
   const { isSessionActive, endSession } = useSession();
 
@@ -59,15 +61,22 @@ export function AgentControlBar({
   } = useInputControls({ onDeviceError, saveUserChoices });
 
   const handleSendMessage = async (message: string) => {
-    await send(message);
-  };
+    const text = message.trim();
+    if (!text) return;
+
+    if (room) {
+    await room.localParticipant.sendText(text, {
+      topic: "lk.chat",
+    });
+  }
+    await send(text);
+  }
 
   const handleToggleTranscript = useCallback(
     (open: boolean) => {
-      setChatOpen(open);
       onChatOpenChange?.(open);
     },
-    [onChatOpenChange, setChatOpen]
+    [onChatOpenChange]
   );
 
   const handleDisconnect = useCallback(async () => {
